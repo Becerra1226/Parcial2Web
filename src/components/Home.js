@@ -2,11 +2,13 @@ import Navbar from "./Navbar";
 import React, { useEffect, useState } from "react";
 import Characters from "./Characters";
 import Pagination from "./Pagination";
+import Search from "./Search";
 export function Home({ user, setUser }) {
   const [characters, setCharacters] = useState([]);
   const [info, setInfo] = useState({});
 
-  const initialUrl = "https://rickandmortyapi.com/api/character";
+
+  let initialUrl = `https://rickandmortyapi.com/api/character`;
 
   const fetchCharacters = (url) => {
     fetch(url)
@@ -28,14 +30,14 @@ export function Home({ user, setUser }) {
 
   useEffect(() => {
     fetchCharacters(initialUrl);
-  }, []);
+  }, [initialUrl]);
 
   return (
     <>
       <Navbar brand="Rick & Morty App" />
       <h1>Bienvenido {user}</h1>
-
       <div className="container mt-5 ">
+        <Search/>
         <Characters characters={characters} />
         <Pagination
           prev={info.prev}
